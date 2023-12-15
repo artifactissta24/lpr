@@ -1,0 +1,40 @@
+{
+  "prompt_from_system": "You are ChatGPT, a large language model trained by OpenAI. Knowledge cutoff: 2021-09. You are an assistant for program analysis and modifications. Please provide a brief step-by-step analysis, and then write the whole final program into a JSON file and be sure to use Markdown syntax to wrap the JSON: ```json{\"program\": \"{PROGRAM_CODE}\"}```. In PROGRAM_CODE, use escape the control characters via double backslash, e.g., \\n and \\t.",
+  "operations": {
+    "function_inlining": {
+      "single_level_question": "Given the following program, identify a function (other than the main function), optimize it out via function inlining.",
+      "multi_level_question": {
+        "primary_question": "Given the following program, identify all functions (other than the main function). Please write the identified functions into a json: {'target_list': [a list of function names]}. If no function is identified, just give an empty list.",
+        "followup_question": "Given the following program and the specified function, optimize it out via function inlining."
+      }
+    },
+    "loop_unrolling": {
+      "single_level_question": "Given the following program, identify a loop structure and optimize it out via loop unrolling.",
+      "multi_level_question": {
+        "primary_question": "Given the following program, identify all loop structures. Please write the identified lines (just copy the first line of code from this loop, e.g., for (xxx) {, while (xxx) {.) into a json: {'target_list': [a list of identified lines]}. If no loop is identified, just give an empty list.",
+        "followup_question": "Given the following program and the first line of a loop, optimize it out via loop unrolling."
+      }
+    },
+    "redundant_data_type": {
+      "single_level_question": "Given the following program, identify a redundant data type (e.g., a data type defined by the programmer via typedef) and substitute every instance of the defined data type with its associated original data type.",
+      "multi_level_question": {
+        "primary_question": "Given the following program, identify all redundant data types (e.g., a data type defined by the programmer via typedef). Please write the identified data type into a json: {'target_list': [a list of identifiers]}. If no data type is identified, just give an empty list.",
+        "followup_question": "Given the following program and the specified data type, eliminate it, and substitute every instance of it with its associated original data type."
+      }
+    },
+    "complex_data_type": {
+      "single_level_question": "In programming, primary data types typically include int, float, short, unsigned, char, etc. Conversely, complex data types typically include structures, classes, arrays, pointers, etc. Given the following program, identify a complex data type, decompose the variables of this data type into variables in primary data types.",
+      "multi_level_question": {
+        "primary_question": "In programming, primary data types typically include int, float, short, unsigned, char, etc. Conversely, complex data types typically include structures, classes, arrays, pointers, etc. Please identify all variables with complex data types. Please write the identified variables into a json: {'target_list': [a list of variable names]}. If no data type is identified, just give an empty list.",
+        "followup_question": "Given the following program and the variable in complex data type, decompose the it into variables with primary data type."
+      }
+    },
+    "unnecessary_variable": {
+      "single_level_question": "Given the following program, identify an intermediate or unused variable (it can be a global variable, local variable, function parameter, etc.), optimize it out via constant propagation or copy propagation.",
+      "multi_level_question": {
+        "primary_question": "Given the following program, identify all intermediate or unused variables (it can be a global variable, local variable, function parameter, etc.). Please write the identified variable names into a json: {'target_list': [a list of variable names]}. If no variable is identified, just give an empty list.",
+        "followup_question": "Given the following program and the specified variable, optimize it out by constant propagation or copy propagation. If this variable is unused, just optimize it out."
+      }
+    }
+  }
+}
